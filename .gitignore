@@ -1,0 +1,5 @@
+gnlTester
+test_files
+*.out
+*.o
+*.so
