@@ -6,7 +6,7 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:50:24 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/14 19:43:57 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:26:13 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,19 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 char	*get_next_line(int fd)
 {
-	char	*static_buffer;
-	char	*new_buffer;
-	char	*buffer;
-	char	*line;
-	int		bytes_read;
-	int		newline_index;
-	int		line_length;
-	int		static_buffer_size;
-	int		new_size;
+	static char	*static_buffer;
+	static int	static_buffer_size;
+	char		*new_buffer;
+	char		*buffer;
+	char		*line;
+	int			bytes_read;
+	int			newline_index;
+	int			line_length;
+	int			new_size;
 
 	if (BUFFER_SIZE < 0)
 		return (NULL);
-	static_buffer = NULL;
 	line = NULL;
-	static_buffer_size = 0;
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
@@ -87,6 +85,7 @@ char	*get_next_line(int fd)
 		if (newline_index >= 0)
 		{
 			line_length = static_buffer_size + newline_index;
+			// printf("mallocLen %ld\n", sizeof(char) * (line_length + 1));
 			line = (char *)malloc(sizeof(char) * (line_length + 1));
 			if (!line)
 			{
@@ -146,6 +145,9 @@ char	*get_next_line(int fd)
 				free(static_buffer);
 				return (NULL);
 			}
+			printf("\nline: %s\n", line);
+			printf("\nstatic_buffer: %s\n", static_buffer);
+			printf("\nstatic_buffer_size: %d\n", static_buffer_size);
 			ft_memcpy(line, static_buffer, static_buffer_size);
 			line[static_buffer_size] = '\0';
 		}
@@ -154,19 +156,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
-{
-	int fd = open("test_files/42_with_nl", O_RDONLY);
-	char *line;
+// int	main(void)
+// {
+// 	int fd = open("gnlTester/files/41_no_nl", O_RDONLY);
+// 	char *line;
 
-	line = get_next_line(fd);
-	printf("%s\n", line);
-	// while (line)
-	// {
-	// 	line = get_next_line(fd);
-	// }
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		printf("%s\n", line);
+// 		line = get_next_line(fd);
+// 	}
 
-	free(line);
-	close(fd);
-	return (0);
-}
+// 	free(line);
+// 	close(fd);
+// 	return (0);
+// }
