@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:50:24 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/19 21:26:37 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/19 21:32:16 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ char	*get_to_next_newline(int fd, char *static_char)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*static_char;
+	static char	*static_char[4096];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	static_char = get_to_next_newline(fd, static_char);
-	if (!static_char)
+	static_char[fd] = get_to_next_newline(fd, static_char[fd]);
+	if (!static_char[fd])
 		return (NULL);
-	line = get_line(static_char);
-	static_char = get_new_line(static_char);
+	line = get_line(static_char[fd]);
+	static_char[fd] = get_new_line(static_char[fd]);
 	if (!line || line[0] == '\0')
 		return (NULL);
 	return (line);
