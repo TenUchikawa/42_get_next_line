@@ -6,7 +6,7 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:50:24 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/14 20:26:13 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:16:57 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
 		newline_index = find_newline(buffer, bytes_read);
 		if (newline_index >= 0)
 		{
-			line_length = static_buffer_size + newline_index;
+			line_length = static_buffer_size + newline_index + 1;
 			// printf("mallocLen %ld\n", sizeof(char) * (line_length + 1));
 			line = (char *)malloc(sizeof(char) * (line_length + 1));
 			if (!line)
@@ -95,8 +95,7 @@ char	*get_next_line(int fd)
 			}
 			if (static_buffer_size > 0)
 				ft_memcpy(line, static_buffer, static_buffer_size);
-			if (newline_index > 0)
-				ft_memcpy(line + static_buffer_size, buffer, newline_index);
+			ft_memcpy(line + static_buffer_size, buffer, newline_index + 1);
 			line[line_length] = '\0';
 			static_buffer_size = bytes_read - (newline_index + 1);
 			new_buffer = (char *)malloc(sizeof(char) * (static_buffer_size
@@ -145,30 +144,29 @@ char	*get_next_line(int fd)
 				free(static_buffer);
 				return (NULL);
 			}
-			printf("\nline: %s\n", line);
-			printf("\nstatic_buffer: %s\n", static_buffer);
-			printf("\nstatic_buffer_size: %d\n", static_buffer_size);
 			ft_memcpy(line, static_buffer, static_buffer_size);
 			line[static_buffer_size] = '\0';
+			static_buffer_size = 0;
+			free(static_buffer);
+			static_buffer = NULL;
 		}
-		free(static_buffer);
 	}
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	int fd = open("gnlTester/files/41_no_nl", O_RDONLY);
-// 	char *line;
+int	main(void)
+{
+	int fd = open("gnlTester/files/multiple_nlx5", O_RDONLY);
+	char *line;
 
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("%s\n", line);
-// 		line = get_next_line(fd);
-// 	}
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		line = get_next_line(fd);
+	}
 
-// 	free(line);
-// 	close(fd);
-// 	return (0);
-// }
+	free(line);
+	close(fd);
+	return (0);
+}
