@@ -6,7 +6,7 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 13:01:11 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/19 21:25:02 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:29:04 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 200
 # endif
 
 char	*get_next_line(int fd);

@@ -6,21 +6,11 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:24:08 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/19 21:25:36 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/22 00:40:49 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
-}
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -55,6 +45,17 @@ char	*ft_strchr(const char *s, int c)
 	return (str);
 }
 
+char	*ft_create_s1(char *s1)
+{
+	if (s1)
+		return (s1);
+	s1 = (char *)malloc(1 * sizeof(char));
+	if (!s1)
+		return (NULL);
+	s1[0] = '\0';
+	return (s1);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
@@ -64,10 +65,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = -1;
 	if (!s1)
-	{
-		s1 = (char *)malloc(1 * sizeof(char));
-		s1[0] = '\0';
-	}
+		s1 = ft_create_s1(s1);
 	if (!s1 || !s2)
 		return (NULL);
 	ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
