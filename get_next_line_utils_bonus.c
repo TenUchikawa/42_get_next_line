@@ -6,7 +6,7 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:24:08 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/26 22:35:13 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/27 00:05:47 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = -1;
-	if (!s1)
-		s1 = ft_create_s1(s1);
+	s1 = ft_create_s1(s1);
 	if (!s1 || !s2)
 		return (NULL);
 	ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
@@ -93,12 +92,16 @@ char	*get_to_nr(char *static_char)
 	if (!newline_address)
 	{
 		line = (char *)malloc(sizeof(int) * (ft_strlen(static_char) + 1));
+		if (!line)
+			return (NULL);
 		ft_memcpy(line, static_char, ft_strlen(static_char));
 		line[ft_strlen(static_char)] = '\0';
 		return (line);
 	}
 	strlen = newline_address - static_char + 1;
 	line = (char *)malloc(sizeof(int) * (strlen + 1));
+	if (!line)
+		return (NULL);
 	ft_memcpy(line, static_char, strlen);
 	line[strlen] = '\0';
 	return (line);

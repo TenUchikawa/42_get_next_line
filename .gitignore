@@ -3,3 +3,4 @@ test_files
 *.out
 *.o
 *.so
+tests

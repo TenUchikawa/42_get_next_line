@@ -6,7 +6,7 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:50:24 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/26 22:35:13 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/27 00:08:10 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ char	*get_next_line(int fd)
 	if (!static_char[fd])
 		return (NULL);
 	line = get_to_nr(static_char[fd]);
+	if (!line)
+		return (NULL);
 	static_char[fd] = get_new_line(static_char[fd]);
 	if (!line || line[0] == '\0')
 		return (NULL);
@@ -94,3 +96,22 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (line);
 }
+
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
+
+// 	fd = open("tests/empty.txt", O_RDONLY);
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	// while (line)
+// 	// {
+// 	// 	printf("%s", line);
+// 	// 	line = get_next_line(fd);
+// 	// }
+// 	free(line);
+// 	close(fd);
+// 	return (0);
+// }
