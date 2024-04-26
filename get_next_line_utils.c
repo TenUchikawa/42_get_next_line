@@ -6,7 +6,7 @@
 /*   By: tuchikaw <tuchikaw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:24:08 by tuchikaw          #+#    #+#             */
-/*   Updated: 2024/04/22 00:40:49 by tuchikaw         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:35:13 by tuchikaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (ptr);
 }
 
-char	*get_line(char *static_char)
+char	*get_to_nr(char *static_char)
 {
 	char	*newline_address;
 	int		strlen;
