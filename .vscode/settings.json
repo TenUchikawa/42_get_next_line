@@ -10,7 +10,4 @@
     "libc.h": "c"
   },
   // disable copilot
-  "github.copilot.enable": {
-    "*": false
-  }
 }

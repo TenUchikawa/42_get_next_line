@@ -4,3 +4,4 @@ test_files
 *.o
 *.so
 tests
+get_next_line.a
